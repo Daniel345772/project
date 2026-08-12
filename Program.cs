@@ -1,35 +1,44 @@
 ﻿using System;
 
-string usuarioCorrecto = "admin";
-string contrasenaCorrecta = "1234";
-
-int intentosRestantes = 3;
-bool accesoConcedido = false;
-
-while (intentosRestantes > 0 && !accesoConcedido)
+class Program
 {
-    Console.Write("Ingrese usuario: ");
-    string usuario = Console.ReadLine();
-
-    Console.Write("Ingrese contraseña: ");
-    string contrasena = Console.ReadLine();
-
-    if (usuario == usuarioCorrecto && contrasena == contrasenaCorrecta)
+    static void Main(string[]args)
     {
-        Console.WriteLine("Acceso concedido al sistema.");
-        accesoConcedido = true;
-    }
-    else
-    {
-        intentosRestantes--;
-
-        if (intentosRestantes > 0)
+        Console.WriteLine("Ingrese su edad:");
+        if (!int.TryParse(Console.ReadLine(), out int edad) || edad < 0)
         {
-            Console.WriteLine($"Credenciales incorrectas. Intentos restantes: {intentosRestantes}");
+            Console.WriteLine("Edad invalida.");
+            return;
+        }
+
+        Console.WriteLine("Ingrese su nivel de seguridad:");
+        if (!int.TryParse(Console.ReadLine(), out int nivel))
+        {
+            Console.WriteLine("Nivel invalido.");
+            return;
+        }
+
+        Console.WriteLine("Su credencial esta activa? (si/no):");
+        string respuesta = Console.ReadLine()!.Trim().ToLower();
+        
+        bool credencialActiva = false;
+        if (respuesta == "si" || respuesta == "sí")
+        {
+            credencialActiva = true;
+        }
+        else if (respuesta != "no")
+        {
+            Console.WriteLine("Respuesta invalida.");
+            return;
+        }
+
+        if (edad >= 18 && nivel >= 3 && credencialActiva)
+        {
+            Console.WriteLine("Acceso autorizado.");
         }
         else
         {
-            Console.WriteLine("SISTEMA BLOQUEADO");
+            Console.WriteLine("Acceso denegado.");
         }
     }
 }
