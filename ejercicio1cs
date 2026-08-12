@@ -1,0 +1,44 @@
+﻿using System;
+
+class Program
+{
+    static void Main(string[]args)
+    {
+        Console.WriteLine("Ingrese su edad:");
+        if (!int.TryParse(Console.ReadLine(), out int edad) || edad < 0)
+        {
+            Console.WriteLine("Edad invalida.");
+            return;
+        }
+
+        Console.WriteLine("Ingrese su nivel de seguridad:");
+        if (!int.TryParse(Console.ReadLine(), out int nivel))
+        {
+            Console.WriteLine("Nivel invalido.");
+            return;
+        }
+
+        Console.WriteLine("Su credencial esta activa? (si/no):");
+        string respuesta = Console.ReadLine()!.Trim().ToLower();
+        
+        bool credencialActiva = false;
+        if (respuesta == "si" || respuesta == "sí")
+        {
+            credencialActiva = true;
+        }
+        else if (respuesta != "no")
+        {
+            Console.WriteLine("Respuesta invalida.");
+            return;
+        }
+
+        if (edad >= 18 && nivel >= 3 && credencialActiva)
+        {
+            Console.WriteLine("Acceso autorizado.");
+        }
+        else
+        {
+            Console.WriteLine("Acceso denegado.");
+        }
+    }
+}
