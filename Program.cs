@@ -1,35 +1,36 @@
 ﻿using System;
 
-string usuarioCorrecto = "admin";
-string contrasenaCorrecta = "1234";
+Console.Write("Ingrese el nivel de alerta (0-10): ");
+string entrada = Console.ReadLine();
 
-int intentosRestantes = 3;
-bool accesoConcedido = false;
-
-while (intentosRestantes > 0 && !accesoConcedido)
+if (int.TryParse(entrada, out int nivel))
 {
-    Console.Write("Ingrese usuario: ");
-    string usuario = Console.ReadLine();
-
-    Console.Write("Ingrese contraseña: ");
-    string contrasena = Console.ReadLine();
-
-    if (usuario == usuarioCorrecto && contrasena == contrasenaCorrecta)
+    if (nivel == 0)
     {
-        Console.WriteLine("Acceso concedido al sistema.");
-        accesoConcedido = true;
+        Console.WriteLine("NORMAL");
+    }
+    else if (nivel >= 1 && nivel <= 3)
+    {
+        Console.WriteLine("ADVERTENCIA");
+    }
+    else if (nivel >= 4 && nivel <= 6)
+    {
+        Console.WriteLine("PELIGRO");
+    }
+    else if (nivel >= 7 && nivel <= 9)
+    {
+        Console.WriteLine("CRÍTICO");
+    }
+    else if (nivel == 10)
+    {
+        Console.WriteLine("EMERGENCIA");
     }
     else
     {
-        intentosRestantes--;
-
-        if (intentosRestantes > 0)
-        {
-            Console.WriteLine($"Credenciales incorrectas. Intentos restantes: {intentosRestantes}");
-        }
-        else
-        {
-            Console.WriteLine("SISTEMA BLOQUEADO");
-        }
+        Console.WriteLine("NIVEL DE ALERTA INVÁLIDO");
     }
+}
+else
+{
+    Console.WriteLine("NIVEL DE ALERTA INVÁLIDO");
 }
