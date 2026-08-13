@@ -6,22 +6,40 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            string[] codigos = { "COD1", "COD2", "ERROR", "COD3", "EXIT", "COD4" };
+            int edad;
+            decimal salario;
+            int anioNacimiento;
 
-            foreach (string codigo in codigos)
+            Console.Write("Ingrese su edad: ");
+            string entradaEdad = Console.ReadLine();
+            while (!int.TryParse(entradaEdad, out edad) || edad < 0)
             {
-                if (codigo == "ERROR")
-                {
-                    continue;
-                }
-
-                if (codigo == "EXIT")
-                {
-                    break;
-                }
-
-                Console.WriteLine($"Código procesado: {codigo}");
+                Console.Write("Edad inválida. Ingrese un número válido: ");
+                entradaEdad = Console.ReadLine();
             }
+
+            Console.Write("Ingrese su salario: ");
+            string entradaSalario = Console.ReadLine();
+            while (!decimal.TryParse(entradaSalario, out salario) || salario < 0)
+            {
+                Console.Write("Salario inválido. Ingrese un valor numérico válido: ");
+                entradaSalario = Console.ReadLine();
+            }
+
+            Console.Write("Ingrese su año de nacimiento: ");
+            string entradaAnio = Console.ReadLine();
+            while (!int.TryParse(entradaAnio, out _) || int.Parse(entradaAnio) < 1900 || int.Parse(entradaAnio) > DateTime.Now.Year)
+            {
+                Console.Write("Año de nacimiento inválido. Ingrese un año válido: ");
+                entradaAnio = Console.ReadLine();
+            }
+
+            anioNacimiento = int.Parse(entradaAnio);
+
+            Console.WriteLine("\n--- Datos Registrados ---");
+            Console.WriteLine($"Edad: {edad}");
+            Console.WriteLine($"Salario: {salario:C}");
+            Console.WriteLine($"Año de nacimiento: {anioNacimiento}");
         }
     }
-}
+}       
