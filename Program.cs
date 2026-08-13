@@ -1,26 +1,23 @@
 ﻿using System;
 
-namespace ConsoleApp1
+class Program
 {
-    internal class Program
+    static void Main()
     {
-        static void Main(string[] args)
+        Random random = new Random();
+
+        Console.WriteLine("¿Cuántos códigos de seguridad desea generar?");
+        if (!int.TryParse(Console.ReadLine(), out int cantidad) || cantidad <= 0)
         {
-            MostrarEstado("OPERATIVO", "El sistema funciona con normalidad.", ConsoleColor.Green);
-            MostrarEstado("INFORMACIÓN", "Se ha registrado un nuevo acceso al sistema.", ConsoleColor.Cyan);
-            MostrarEstado("ADVERTENCIA", "Uso de memoria elevado (85%).", ConsoleColor.Yellow);
-            MostrarEstado("ERROR", "Fallo al conectar con la base de datos.", ConsoleColor.White, ConsoleColor.Red);
+            Console.WriteLine("Cantidad inválida.");
+            return;
         }
 
-        static void MostrarEstado(string estado, string mensaje, ConsoleColor colorTexto, ConsoleColor colorFondo = ConsoleColor.Black)
+        Console.WriteLine("\nCódigos generados:");
+        for (int i = 0; i < cantidad; i++)
         {
-            Console.ForegroundColor = colorTexto;
-            Console.BackgroundColor = colorFondo;
-
-            Console.Write($"[{estado}]");
-
-            Console.ResetColor();
-            Console.WriteLine($" {mensaje}");
+            int codigo = random.Next(100000, 1000000);
+            Console.WriteLine(codigo);
         }
     }
 }
