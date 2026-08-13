@@ -4,20 +4,28 @@ class Program
 {
     static void Main()
     {
-        Random random = new Random();
+        DateTime fechaActual = DateTime.Now;
+        
+        Console.WriteLine("Fecha y hora actual: " + fechaActual.ToString("dd/MM/yyyy HH:mm:ss"));
+        Console.WriteLine("Día: " + fechaActual.Day);
+        Console.WriteLine("Mes: " + fechaActual.Month);
+        Console.WriteLine("Año: " + fechaActual.Year);
 
-        Console.WriteLine("¿Cuántos códigos de seguridad desea generar?");
-        if (!int.TryParse(Console.ReadLine(), out int cantidad) || cantidad <= 0)
+        Console.WriteLine("\nIngrese su fecha de nacimiento (dd/mm/yyyy):");
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime fechaNacimiento))
         {
-            Console.WriteLine("Cantidad inválida.");
-            return;
+            int edad = fechaActual.Year - fechaNacimiento.Year;
+            
+            if (fechaActual.Month < fechaNacimiento.Month || (fechaActual.Month == fechaNacimiento.Month && fechaActual.Day < fechaNacimiento.Day))
+            {
+                edad--;
+            }
+            
+            Console.WriteLine("Edad calculada: " + edad + " años.");
         }
-
-        Console.WriteLine("\nCódigos generados:");
-        for (int i = 0; i < cantidad; i++)
+        else
         {
-            int codigo = random.Next(100000, 1000000);
-            Console.WriteLine(codigo);
+            Console.WriteLine("Formato de fecha inválido.");
         }
     }
 }
