@@ -6,39 +6,32 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.Write("Ingrese el nivel de alerta (0-10): ");
-            string entrada = Console.ReadLine();
+            int intentos = 0;
+            bool accesoConcedido = false;
 
-            if (int.TryParse(entrada, out int nivel))
+            while (intentos < 3 && !accesoConcedido)
             {
-                if (nivel == 0)
+                Console.Write("Ingrese la contraseña: ");
+                string clave = Console.ReadLine();
+
+                if (clave == "1234")
                 {
-                    Console.WriteLine("NORMAL");
-                }
-                else if (nivel >= 1 && nivel <= 3)
-                {
-                    Console.WriteLine("ADVERTENCIA");
-                }
-                else if (nivel >= 4 && nivel <= 6)
-                {
-                    Console.WriteLine("PELIGRO");
-                }
-                else if (nivel >= 7 && nivel <= 9)
-                {
-                    Console.WriteLine("CRÍTICO");
-                }
-                else if (nivel == 10)
-                {
-                    Console.WriteLine("EMERGENCIA");
+                    accesoConcedido = true;
+                    Console.WriteLine("Acceso concedido");
                 }
                 else
                 {
-                    Console.WriteLine("NIVEL DE ALERTA INVÁLIDO");
+                    intentos++;
+                    if (intentos < 3)
+                    {
+                        Console.WriteLine($"Contraseña incorrecta. Intentos restantes: {3 - intentos}");
+                    }
                 }
             }
-            else
+
+            if (!accesoConcedido)
             {
-                Console.WriteLine("NIVEL DE ALERTA INVÁLIDO");
+                Console.WriteLine("Acceso bloqueado");
             }
         }
     }
