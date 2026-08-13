@@ -6,32 +6,21 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            int intentos = 0;
-            bool accesoConcedido = false;
+            string[] codigos = { "COD1", "COD2", "ERROR", "COD3", "EXIT", "COD4" };
 
-            while (intentos < 3 && !accesoConcedido)
+            foreach (string codigo in codigos)
             {
-                Console.Write("Ingrese la contraseña: ");
-                string clave = Console.ReadLine();
-
-                if (clave == "1234")
+                if (codigo == "ERROR")
                 {
-                    accesoConcedido = true;
-                    Console.WriteLine("Acceso concedido");
+                    continue;
                 }
-                else
-                {
-                    intentos++;
-                    if (intentos < 3)
-                    {
-                        Console.WriteLine($"Contraseña incorrecta. Intentos restantes: {3 - intentos}");
-                    }
-                }
-            }
 
-            if (!accesoConcedido)
-            {
-                Console.WriteLine("Acceso bloqueado");
+                if (codigo == "EXIT")
+                {
+                    break;
+                }
+
+                Console.WriteLine($"Código procesado: {codigo}");
             }
         }
     }
